@@ -8,6 +8,8 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.path.json.JsonPath;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.simple.JSONObject;
 
 import java.util.List;
@@ -18,7 +20,7 @@ import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 
 public class UsedCarsApiSteps {
 
-   // private static final Logger logger = LogManager.getLogger(UsedCarsApiSteps.class);
+    private static final Logger logger = LogManager.getLogger(UsedCarsApiSteps.class);
     private JSONObject jsonObject;
     ApiService apiService ;
 
@@ -38,6 +40,7 @@ public class UsedCarsApiSteps {
     public void getListofUsedCars(Integer noofitems){
        JsonPath jsonPath =  apiService.getServiceResponse();
        List<String> usedCarsNameList = jsonPath.getList("Subcategories.Name");
+       logger.info("There listing in the trade me used cars list", usedCarsNameList.size());
        assertThat("There is 0 listing in the trade me used cars list", usedCarsNameList.size(), greaterThanOrEqualTo(noofitems));
     }
 
@@ -46,6 +49,7 @@ public class UsedCarsApiSteps {
         JsonPath jsonPath =  apiService.getServiceResponse();
         List<String> usedCarsNameList = jsonPath.getList("Subcategories.Name");
         boolean isModelAvaialble = Validator.iterateInList(usedCarsNameList,modelName,true);
+        logger.info("There model -:"+modelName + " : to be available in the list", isModelAvaialble);
         assertThat("There model -:"+modelName + " : is not available in the list", isModelAvaialble);
     }
 }
