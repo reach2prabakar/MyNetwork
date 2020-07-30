@@ -1,6 +1,5 @@
 package com.client.modules;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
@@ -30,7 +29,7 @@ public class TradeMePage {
     public List<WebElement> lstUsedCarsMakes;
 
     @FindAll(
-        @FindBy(css = "#ListViewList li a.tmm-search-card-list-view__link .tmm-search-card-list-view__content-body")
+        @FindBy(xpath = "//ul[@id='ListViewList']/li[1]//div/a")
     )
     public List<WebElement> lstUsedCarsList;
 

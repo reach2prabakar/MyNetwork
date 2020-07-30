@@ -7,6 +7,18 @@
     <groupId>org.example</groupId>
     <artifactId>RecruitIt_TradeMe_AutomationFramework</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <cucumber.version>6.2.2</cucumber.version>
+        <junit.version>4.13</junit.version>
+        <maven.compiler.plugin>3.8.1</maven.compiler.plugin>
+        <maven-surefire-plugin>3.0.0-M5</maven-surefire-plugin>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <rest-assured.version>3.1.0</rest-assured.version>
+        <selenium.version>4.0.0-alpha-6</selenium.version>
+        <karate.version>0.9.6.RC4</karate.version>
+        <threads>1</threads>
+    </properties>
     <build>
         <plugins>
             <plugin>
@@ -23,19 +35,33 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin}</version>
             </plugin>
+            <plugin>
+                <groupId>net.masterthought</groupId>
+                <artifactId>maven-cucumber-reporting</artifactId>
+                <version>5.0.0</version>
+                <executions>
+                    <execution>
+                        <id>execution</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <projectName>TradeMeReport</projectName>
+                            <outputDirectory>${project.build.directory}/advanced-reports</outputDirectory>
+                            <cucumberOutput>${project.build.directory}/Reports/CucumberTestReport.json</cucumberOutput>
+                            <parallelTesting>false</parallelTesting>
+                            <jsonFiles>
+                                <param>**/*.json</param>
+                            </jsonFiles>
+                             <!-- optional, set true to fail build on test failures -->
+                            <checkBuildResult>false</checkBuildResult>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
-        <testSourceDirectory>${project.basedir}/src/main/java/com/client/stepdefinitions</testSourceDirectory>
-        <testResources>
-            <testResource>
-                <directory>${project.basedir}/src/main/resources</directory>
-                <targetPath>${project.basedir}/${target.dir}/classes/Karate</targetPath>
-            </testResource>
-        </testResources>
-        <resources>
-            <resource>
-                <directory>${project.basedir}/src/main/resources</directory>
-            </resource>
-        </resources>
+
     </build>
     <dependencies>
         <dependency>
@@ -130,22 +156,5 @@
             <artifactId>webdrivermanager</artifactId>
             <version>4.1.0</version>
         </dependency>
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-junit</artifactId>
-            <version>5.4.2</version>
-            <scope>compile</scope>
-        </dependency>
     </dependencies>
-    <properties>
-        <cucumber.version>6.2.2</cucumber.version>
-        <junit.version>4.13</junit.version>
-        <maven.compiler.plugin>3.8.1</maven.compiler.plugin>
-        <maven-surefire-plugin>3.0.0-M5</maven-surefire-plugin>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <rest-assured.version>3.1.0</rest-assured.version>
-        <selenium.version>4.0.0-alpha-6</selenium.version>
-        <karate.version>0.9.6.RC4</karate.version>
-        <threads>1</threads>
-    </properties>
 </project>

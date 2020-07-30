@@ -1,6 +1,5 @@
 package com.client.stepdefinitions.ui;
 
-import com.client.helpers.AppHelpers;
 import com.client.helpers.Validator;
 import com.client.modules.*;
 import com.client.processor.TradeMeTest;
@@ -12,9 +11,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -61,7 +58,7 @@ public class UsedCarsSearchSteps extends TradeMeTest {
     @And("^users navigates to the used cars details page$")
     public void selectUsedCarsDetails(){
         UsedCarsPage usedCarsPage = new UsedCarsPage(driver);
-        usedCarsPage.getUsedCarsList("Jeep").click();
+        usedCarsPage.getUsedCarsList("a").click();
         new UsedCarsDetailsPage(driver);
     }
 
