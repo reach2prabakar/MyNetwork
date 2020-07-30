@@ -15,7 +15,7 @@ public class Hooks {
         driverManager.createDriver(new DriverClass());
     }
 
-    @After
+    @After("@ui")
     public void afterScenario(){
         driverManager.cleanDriver();
         DataHandlerThread.removeCurrentThread();
